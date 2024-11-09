@@ -16,7 +16,7 @@ module.exports = {
 
         try {
           const dataExists = await Model.findOne({
-           
+
             is_inactive: false,
           }).lean();
 
@@ -107,7 +107,7 @@ module.exports = {
         { $limit: _limit },
         {
           $lookup: {
-            from: "classes", 
+            from: "classes",
             localField: "class",
             foreignField: "_id",
             as: "classDetails",
@@ -135,42 +135,42 @@ module.exports = {
       next(error);
     }
   },
-  
+
   // update: async (req, res, next) => {
   //   try {
   //     const { id } = req.params;
-  
+
   //     // Check if the provided ID is valid
   //     if (!id || !mongoose.Types.ObjectId.isValid(id)) {
   //       throw createError.BadRequest("Invalid Parameters");
   //     }
-  
+
   //     // Prepare the update data
   //     const data = req.body;
-  
+
   //     if (!data && !req.file) {
   //       throw createError.BadRequest("No data provided for update");
   //     }
-  
+
   //     if (req.file) {
   //       data.image = req.file.path; // Assuming `image` is the field for the uploaded image
   //     }
-  
+
   //     if (req.user) {
   //       data.updated_by = req.user.id;
   //     }
   //     data.updated_at = Date.now();
-  
+
   //     const result = await Model.findByIdAndUpdate(
   //       { _id: mongoose.Types.ObjectId(id) },
   //       { $set: data },
-  //       { new: true } 
+  //       { new: true }
   //     );
-  
+
   //     if (!result) {
   //       throw createError.NotFound("entity not found");
   //     }
-  
+
   //     // Respond with the updated "about" entity
   //     res.json(result);
   //   } catch (error) {
@@ -277,11 +277,11 @@ module.exports = {
   //   const { id } = req.params;
   //   console.log(id)
   //   const { page, limit, order_by, order_in } = req.query;
-  
+
   //   const _page = page ? parseInt(page) : 1;
   //   const _limit = limit ? parseInt(limit) : 10;
   //   const _skip = (_page - 1) * _limit;
-  
+
   //   try {
   //     // Define sorting logic
   //     let sorting = {};
@@ -290,21 +290,21 @@ module.exports = {
   //     } else {
   //       sorting["_id"] = -1; // Default sorting by _id (descending)
   //     }
-  
+
   //     // Ensure id is a valid ObjectId
   //     const classId = mongoose.Types.ObjectId.isValid(id) ? mongoose.Types.ObjectId(id) : null;
   //     if (!classId) {
   //       return res.status(400).json({ message: "Invalid class ID format" });
   //     }
-  
+
   //     // Aggregation pipeline to filter by class and disabled fields
   //     const query = {
   //       class: classId,
   //       disabled: false,
   //     };
-  
+
   //     console.log("Query:", query); // Log the query for debugging
-  
+
   //     let result = await Model.aggregate([
   //       { $match: query }, // Match the query for class and disabled fields
   //       { $sort: sorting }, // Apply sorting
@@ -320,13 +320,13 @@ module.exports = {
   //       },
   //       { $unwind: "$classDetails" }, // Unwind the classDetails array
   //     ]);
-  
+
   //     console.log("Result:", result); // Log the result to check if anything is returned
-  
+
   //     // Count total number of results for pagination metadata
   //     const resultCount = await Model.countDocuments(query);
   //     console.log("Result Count:", resultCount); // Log the count
-  
+
   //     // Respond with data and pagination metadata
   //     res.json({
   //       data: result,
@@ -348,11 +348,11 @@ module.exports = {
     const { id } = req.params;
     console.log(id);
     const { page, limit, order_by, order_in } = req.query;
-  
+
     const _page = page ? parseInt(page) : 1;
     const _limit = limit ? parseInt(limit) : 10;
     const _skip = (_page - 1) * _limit;
-  
+
     try {
       // Define sorting logic
       let sorting = {};
@@ -361,21 +361,21 @@ module.exports = {
       } else {
         sorting["_id"] = -1; // Default sorting by _id (descending)
       }
-  
+
       // Ensure id is a valid ObjectId
       const classId = mongoose.Types.ObjectId.isValid(id) ? mongoose.Types.ObjectId(id) : null;
       if (!classId) {
         return res.status(400).json({ message: "Invalid class ID format" });
       }
-  
+
       // Aggregation pipeline to filter subjects by class ID
       const query = {
         class: classId, // Match the class ID
         disabled: false, // Only fetch subjects that are not disabled
       };
-  
+
       console.log("Query:", query); // Log the query for debugging
-  
+
       let result = await Model.aggregate([
         { $match: query }, // Match the query for class and disabled fields
         { $sort: sorting }, // Apply sorting
@@ -391,13 +391,13 @@ module.exports = {
         },
         { $unwind: "$classDetails" }, // Unwind the classDetails array
       ]);
-  
+
       console.log("Result:", result); // Log the result to check if anything is returned
-  
+
       // Count total number of results for pagination metadata
       const resultCount = await Model.countDocuments(query);
       console.log("Result Count:", resultCount); // Log the count
-  
+
       // Respond with data and pagination metadata
       res.json({
         data: result,
@@ -415,7 +415,7 @@ module.exports = {
       res.status(500).json({ message: "Failed to retrieve subjects", error });
     }
   },
-  
+
 //   classlistForTeacher: async (req, res, next) => {
 //     try {
 //         const { name, disabled, is_inactive, page, limit, order_by, order_in } = req.query;
@@ -530,7 +530,7 @@ classlistForTeacher: async (req, res, next) => {
       { $limit: _limit },
       {
         $lookup: {
-          from: "classes", 
+          from: "classes",
           localField: "class",
           foreignField: "_id",
           as: "classDetails",

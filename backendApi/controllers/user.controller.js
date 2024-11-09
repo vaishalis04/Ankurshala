@@ -113,6 +113,17 @@ module.exports = {
         {
           $match: query,
         },
+        {
+          $lookup: {
+            from: "roles",
+            localField: "role",
+            foreignField: "_id",
+            as: "roleDetails",
+          },
+        },
+        {
+          $unwind: "$roleDetails",
+        },
         // {
         //   $project: {
         //     password: 0,

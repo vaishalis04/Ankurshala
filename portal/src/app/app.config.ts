@@ -65,16 +65,6 @@ export const roleWiseAccess = [
     page: 'class-details'
   },
   {
-    label: 'Profile Page',
-    PERMISSION_CODE: 'PROFILE_VIEW',
-    page: 'profile'
-  },
-  {
-    label: 'Settings Page',
-    PERMISSION_CODE: 'SETTINGS_VIEW',
-    page: 'settings'
-  },
-  {
     label: 'class Management Page',
     PERMISSION_CODE: 'CLASS_VIEW',
     page: 'addClass'
@@ -175,5 +165,15 @@ export const roleWiseAccess = [
   {
     label: 'Delete Class',
     PERMISSION_CODE: 'EXPLORE_DELETE'
+  },
+  {
+    label: 'Profile Page',
+    PERMISSION_CODE: 'PROFILE_VIEW',
+    page: 'profile'
+  },
+  {
+    label: 'Settings Page',
+    PERMISSION_CODE: 'SETTINGS_VIEW',
+    page: 'settings'
   },
 ]

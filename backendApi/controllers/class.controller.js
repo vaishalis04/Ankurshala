@@ -11,7 +11,7 @@ module.exports = {
   //     const data = req.body;
 
   //     try {
-        
+
   //       // Check if a class with the same name already exists
   //       const classExists = await Model.findOne({
   //         name: data.name,
@@ -47,35 +47,35 @@ module.exports = {
         if (err) {
           return res.status(501).json({ error: err.message });
         }
-  
+
         const data = req.body;
-  
+
         try {
           // Check if a class with the same name already exists
           const classExists = await Model.findOne({
             name: data.name,
             is_inactive: false,
           }).lean();
-  
+
           if (classExists) {
             throw createError.Conflict("Class with this name already exists.");
           }
-  
+
           // Add timestamps and user info if applicable
           data.created_at = Date.now();
           if (req.user) {
             data.created_by = req.user.id;
           }
-  
+
           // If an image is uploaded, save the image path
           if (req.file) {
             data.image = req.file.path;
           }
-  
+
           // Create the new class
           const newClass = new Model(data);
           const result = await newClass.save();
-  
+
           // Respond with the created class
           res.json(result);
         } catch (error) {
@@ -86,7 +86,7 @@ module.exports = {
       next(error); // Catch any unforeseen errors
     }
   },
-  
+
   get: async (req, res, next) => {
    try {
     const { id } = req.params;
@@ -254,13 +254,13 @@ update: async (req, res, next) => {
         throw createError.BadRequest("Invalid Parameters");
       }
       const deleted_at = Date.now(); // Record the deletion time
-      
+
       // Update the class entry to mark it as inactive
       const result = await Model.updateOne(
         { _id: mongoose.Types.ObjectId(id) },
         { $set: {disabled:true, is_inactive: true, deleted_at } }
       );
-      
+
       // If no records were modified, the ID may not exist
       if (result.nModified === 0) {
         throw createError.NotFound("Class not found");

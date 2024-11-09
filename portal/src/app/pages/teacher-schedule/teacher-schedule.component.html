@@ -16,16 +16,15 @@
                   </div>
               </div>
 
-              <div class="row text-center pt-4">
+              <div class="row pt-4">
                 <div class="col-md-3 mb-3" *ngFor="let class of data; let i = index">
                     <button type="button" class="btn btn-outline-primary w-100 d-flex justify-content-between align-items-center" (click)="toggleList(i)">
-                      {{ class.classDetails.name }} <span class="icon">{{ showList[i] ? '-' : '+' }}</span> 
+                      {{ class.classDetails.name }} <span class="icon">{{ showList[i] ? '-' : '+' }}</span>
                     </button>
 
                     <!-- <ul *ngIf="showList[i]" class="list-group mt-2">
                         <li class="list-group-item d-flex align-items-center" *ngFor="let subject of class.subjects; let j = index">
-                            
-                            <span class="ms-2 me-2">{{ j + 1 }}. {{ subject.subjectDetails.name }}</span> 
+                            <span class="ms-2 me-2">{{ j + 1 }}. {{ subject.subjectDetails.name }}</span>
                             <input
                             type="checkbox"
                             (change)="toggleSelection(subject)"
@@ -42,8 +41,8 @@
                       </li>
                     </ul>
                   </div>
-            </div>           
-              
+            </div>
+
               <div class="d-flex justify-content-center">
                   <button type="button" class="btn btn-primary" (click)="saveData()">Submit</button>
               </div>

@@ -48,6 +48,7 @@ export class TeacherScheduleComponent {
       this.limit = data.meta.per_page;
     });
   }
+
   getTeacherscheduleData() {
     this.apiService.get('teacherSchedule', {
       params: {
